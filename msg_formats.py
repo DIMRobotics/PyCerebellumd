@@ -8,7 +8,7 @@ def mmToTicks(mm):
 
 
 def mmsToSpeed(mms):
-    return mms * 10
+    return mms * 67
 
 
 def input_position(message):
@@ -44,7 +44,7 @@ def input_twist_busy(message):
 # Repack twist message
 def output_twist(message):
     i = struct.unpack("!ddd", message)
-    return struct.pack(">hhi", int(mmsToSpeed(i[0])), int(mmsToSpeed(i[1])), int(mmToTicks(i[2])))
+    return struct.pack("<hhi", int(mmsToSpeed(i[0])), int(mmsToSpeed(i[1])), int(mmToTicks(i[2])))
 
 
 # Repack dynamics message
@@ -54,7 +54,7 @@ def output_dynamics(message):
     acc_fr.limit_denominator(32)
     brk_fr = Fraction(i[1])
     brk_fr.limit_denominator(32)
-    return struct.pack(">hhhh", acc_fr.numerator, acc_fr.denominator, brk_fr.numerator, brk_fr.denominator)
+    return struct.pack("<hhhh", acc_fr.numerator, acc_fr.denominator, brk_fr.numerator, brk_fr.denominator)
 
 
 def output_odetect_limits(message):
