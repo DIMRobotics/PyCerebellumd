@@ -37,7 +37,7 @@ def input_twist_busy(message):
 # Repack twist message
 def output_twist(message):
     i = struct.unpack("!ddd", message)
-    return struct.pack("<hhi", int(i[0]), int(i[1]), int(i[2]))
+    return struct.pack(">hhi", int(i[0]), int(i[1]), int(i[2]))
 
 
 # Repack dynamics message
