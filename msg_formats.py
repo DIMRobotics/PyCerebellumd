@@ -37,7 +37,7 @@ def input_twist_busy(message):
 # Repack twist message
 def output_twist(message):
     i = struct.unpack("!ddd", message)
-    return struct.pack(">hhI", i[0], i[1], i[2])
+    return struct.pack("<hhi", int(i[0]), int(i[1]), int(i[2]))
 
 
 # Repack dynamics message
@@ -56,7 +56,8 @@ def output_odetect_limits(message):
 
 
 def output_servo(message):
-    pass
+    i = struct.unpack("!id", message)
+    return struct.pack(">BB", i[0], int(i[1]))
 
 
 def output_led(message):
