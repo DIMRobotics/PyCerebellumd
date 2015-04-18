@@ -1,7 +1,14 @@
 import struct
 from fractions import Fraction
 
+
 # TODO: add robot parameters here
+def mmToTicks(mm):
+    return mm * 480 / 22
+
+
+def mmsToSpeed(mms):
+    return mms * 10
 
 
 def input_position(message):
@@ -37,7 +44,7 @@ def input_twist_busy(message):
 # Repack twist message
 def output_twist(message):
     i = struct.unpack("!ddd", message)
-    return struct.pack(">hhi", int(i[0]), int(i[1]), int(i[2]))
+    return struct.pack(">hhi", int(mmsToSpeed(i[0])), int(mmsToSpeed(i[1])), int(mmToTicks(i[2])))
 
 
 # Repack dynamics message
