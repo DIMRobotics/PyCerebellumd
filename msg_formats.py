@@ -34,11 +34,11 @@ def arg_sensor(message):
 
 
 def input_twist_busy(message):
-    i = struct.unpack(">h", message)
-    if i > 0:
-        return "busy"
+    i = struct.unpack(">B", message)
+    if i[0] > 0:
+        return "b"
     else:
-        return "free"
+        return "f"
 
 
 # Repack twist message

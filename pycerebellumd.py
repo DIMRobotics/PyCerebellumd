@@ -5,7 +5,7 @@ from msg_formats import brd_inparse, brd_outparse, brd_argparse
 from sys import argv
 
 brd_inregs = {
-    "twist_busy": 1,
+    "twist_busy": 6,
     "bsensor": 2,
     "sensor": 3,
 }
