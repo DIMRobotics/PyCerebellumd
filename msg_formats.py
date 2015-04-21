@@ -16,12 +16,13 @@ def input_position(message):
 
 
 def input_bsensor(message):
-    i = struct.unpack(">h", message)
-    return struct.pack("!I", i[0])
+    i = struct.unpack("<B", message)
+    return struct.pack("!B", i[0])
 
 
 def arg_bsensor(message):
-    return []
+    i = struct.unpack("!I", message)[0]
+    return struct.pack("<B", i)
 
 
 def input_sensor(message):
@@ -30,7 +31,7 @@ def input_sensor(message):
 
 
 def arg_sensor(message):
-    return struct.pack(">B", int(message))
+    return struct.pack(">B", struct.unpack("!I", message))
 
 
 def input_twist_busy(message):
@@ -84,7 +85,7 @@ brd_inparse = {
 
 brd_argparse = {
     "position": arg_dummy,
-    "bsensor": arg_dummy,
+    "bsensor": arg_bsensor,
     "sensor": arg_sensor,
     "twist_busy": arg_dummy
 }

@@ -6,7 +6,7 @@ from sys import argv
 
 brd_inregs = {
     "twist_busy": 6,
-    "bsensor": 2,
+    "bsensor": 7,
     "sensor": 3,
 }
 
@@ -63,6 +63,7 @@ def recv_reply():
 
 def brd_read(msg_type, data):
     # accept arguments data
+    print data
     data = brd_argparse[msg_type](data)
     rq = struct.pack(">BB", brd_inregs[msg_type], len(data))
 
