@@ -50,7 +50,6 @@ def board_rq(msg):
 def recv_reply():
     ln = serial.read()
     ln = struct.unpack(">B", ln)[0]
-    print ln
 
     reply = ""
 

@@ -51,10 +51,11 @@ def output_twist(message):
 def output_dynamics(message):
     i = struct.unpack("!dd", message)
     acc_fr = Fraction(i[0])
-    acc_fr.limit_denominator(32)
+    acc_fr = acc_fr.limit_denominator(8)
     brk_fr = Fraction(i[1])
-    brk_fr.limit_denominator(32)
-    return struct.pack("<hhhh", acc_fr.numerator, acc_fr.denominator, brk_fr.numerator, brk_fr.denominator)
+    brk_fr = brk_fr.limit_denominator(8)
+    return struct.pack("<hhhh", int(acc_fr.numerator), int(acc_fr.denominator),
+                       int(brk_fr.numerator), int(brk_fr.denominator))
 
 
 def output_odetect_limits(message):
