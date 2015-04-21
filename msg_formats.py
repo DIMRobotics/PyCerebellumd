@@ -61,7 +61,7 @@ def output_dynamics(message):
 
 def output_odetect_limits(message):
     i = struct.unpack("!Ii", message)
-    return struct.pack(">hh", i[0], i[1])
+    return struct.pack("<BB", i[0], i[1])
 
 
 def output_servo(message):
